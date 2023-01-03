@@ -6,7 +6,16 @@
 // ImprimirValores(queries.LibrosDespuesDel2000());
 
 // libros que tengan mas de 250 pags, y titulo contenga "in Action"
-ImprimirValores(queries.LibrosMasde250PagsTituloContieneinAction());
+//ImprimirValores(queries.LibrosMasde250PagsTituloContieneinAction());
+
+//Usando el operador All, verifica que todos los elementos de la coleccion
+//tengan un valor en el campo Status
+Console.WriteLine(queries.TodosLosLibrosTienenStatus()); // True, todos los libros tienen status
+
+//Usando el operador Any verifica si alguno de los libros fue publicado en 2005
+Console.WriteLine(queries.HayAlgunLibroPublicado2005()); // True
+
+
 
 void ImprimirValores(IEnumerable<Book> listaLibros)
 {
