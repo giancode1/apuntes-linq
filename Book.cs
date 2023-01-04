@@ -12,5 +12,4 @@ public class Book
     public string[] Authors {get; set;}
     public string[] Categories {get; set;}
 
-    
 }

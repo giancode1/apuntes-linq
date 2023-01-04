@@ -5,11 +5,23 @@ public class LinqQueries
     private List<Book> librosCollection = new List<Book>();
     public LinqQueries() //constructor
     {
-        using (StreamReader reader = new StreamReader("books.json"))
+        try
         {
-            string json = reader.ReadToEnd();
-            this.librosCollection = JsonSerializer.Deserialize<List<Book>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            using (StreamReader reader = new StreamReader("books.json"))
+            {
+                string json = reader.ReadToEnd();
+                this.librosCollection = JsonSerializer.Deserialize<List<Book>>(json, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            }
         }
+        catch (FileNotFoundException ex)
+        {
+            Console.WriteLine("No se ha encontrado el archivo: " + ex.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error al leer o procesar el archivo: " + ex.Message);
+        }
+
     }
     public IEnumerable<Book> TodaLaColeccion()
     {
@@ -127,13 +139,13 @@ public class LinqQueries
     public string TitulosLibrosDespues2015Concatenados()
     {
         return librosCollection.Where(p => p.PublishedDate.Year > 2015)
-        .Aggregate("", (TitulosLibros, next) => 
+        .Aggregate("", (TitulosLibros, next) =>
         {
-            if(TitulosLibros != string.Empty)
+            if (TitulosLibros != string.Empty)
                 TitulosLibros += " - " + next.Title;
             else
                 TitulosLibros += next.Title;
-            
+
             return TitulosLibros;
         });
     }
@@ -145,14 +157,19 @@ public class LinqQueries
 
     public double PromedioNumeroPagsLibros()
     {
-        return librosCollection.Where(p => p.PageCount>0).Average(p => p.PageCount);
+        return librosCollection.Where(p => p.PageCount > 0).Average(p => p.PageCount);
         // hay libros cuyo PageCount = 0, no significa que sean 0 sino que no se sabe cuantas paginas tiene
     }
 
     public IEnumerable<IGrouping<int, Book>> LibrosDespuesDel2000AgrupadosPorAnio()
     {
-        return librosCollection.Where(p=>p.PublishedDate.Year >= 200).GroupBy(p => p.PublishedDate.Year);
+        return librosCollection.Where(p => p.PublishedDate.Year >= 200).GroupBy(p => p.PublishedDate.Year);
         // agrupa por anio
+    }
+
+    public ILookup<char, Book> DiccionarioDeLibrosPorLetra()
+    { // Diccionario tipo ILookup, devuelve char, Book
+        return librosCollection.ToLookup(p => p.Title[0], p => p); // (obtenga la primera letra , agrupa libro como tal sin filtro)
     }
 
 }
