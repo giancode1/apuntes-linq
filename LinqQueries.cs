@@ -99,7 +99,15 @@ public class LinqQueries
         // return librosCollection.Count(p => p.PageCount >=200 && p.PageCount<=500);  //cambia el int a long
     }
 
+    public DateTime FechaPublicacionMenor()
+    {
+        return librosCollection.Min(p => p.PublishedDate);
+    }
 
+    public int MaxCantidadPagsEnColeccion()
+    {
+        return librosCollection.Max(p => p.PageCount);
+    }
 
 
 

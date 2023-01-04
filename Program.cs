@@ -36,7 +36,13 @@
 //ImprimirValoresItem(queries.TresPrimerosLibrosSelect());
 
 //*Usando Count, retornar #libros que tengan entre 200-500 pags
-Console.WriteLine("Cantidad de libros que tienen entre 200 y 500 pags: " + queries.CantidadLibrosEntre200a500Pags());
+//Console.WriteLine("Cantidad de libros que tienen entre 200 y 500 pags: " + queries.CantidadLibrosEntre200a500Pags());
+
+//*Con Min, retorna la menor fecha de publicación de la lista de libros
+Console.WriteLine("Menor fecha de publicación: " + queries.FechaPublicacionMenor());
+
+//*Con Max, retorna la cantidad de pags de libro con mayor num de pags en la coleccion
+Console.WriteLine("Max cantidad de páginas: " + queries.MaxCantidadPagsEnColeccion());
 
 
 void ImprimirValores(IEnumerable<Book> listaLibros)
