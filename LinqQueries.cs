@@ -92,7 +92,14 @@ public class LinqQueries
             });
     }
 
-    
+    public long CantidadLibrosEntre200a500Pags()
+    {
+        return librosCollection.LongCount(p => p.PageCount >=200 && p.PageCount<=500);
+        //return librosCollection.Where(p => p.PageCount >=200 && p.PageCount<=500).LongCount(); // sirve pero no es buena practica, ya que la condicion puede ir en el LongCount y asi ahorrar ese where
+        // return librosCollection.Count(p => p.PageCount >=200 && p.PageCount<=500);  //cambia el int a long
+    }
+
+
 
 
 

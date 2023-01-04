@@ -33,8 +33,10 @@
 
 //*Retornar cietos datos en especifico
 //*Con Select, selecciona el titulo y el Num de pags de los 3 primeros libros de la coleccion
-ImprimirValoresItem(queries.TresPrimerosLibrosSelect());
+//ImprimirValoresItem(queries.TresPrimerosLibrosSelect());
 
+//*Usando Count, retornar #libros que tengan entre 200-500 pags
+Console.WriteLine("Cantidad de libros que tienen entre 200 y 500 pags: " + queries.CantidadLibrosEntre200a500Pags());
 
 
 void ImprimirValores(IEnumerable<Book> listaLibros)
