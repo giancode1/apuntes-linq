@@ -28,7 +28,7 @@ public class LinqQueries
     public IEnumerable<Book> LibrosMasde250PagsTituloContieneinAction()
     {
         //*Extension Method
-        return librosCollection.Where(p => p.PageCount>250 && p.Title.Contains("in Action"));
+        return librosCollection.Where(p => p.PageCount > 250 && p.Title.Contains("in Action"));
 
         //*Query expression
         //return from l in librosCollection where l.PageCount > 250 && l.Title.Contains("in Action") select l;
@@ -56,7 +56,7 @@ public class LinqQueries
 
     public IEnumerable<Book> LibrosMasDe450PagsOrdenadosNumPagsDescendente()
     {
-        return librosCollection.Where(p => p.PageCount>450).OrderByDescending(p => p.PageCount);
+        return librosCollection.Where(p => p.PageCount > 450).OrderByDescending(p => p.PageCount);
     }
 
     public IEnumerable<Book> Primeros3LibrosJavaPublicacionReciente()
@@ -65,22 +65,34 @@ public class LinqQueries
             .Where(p => p.Categories.Contains("Java"))
             .OrderByDescending(p => p.PublishedDate)
             .Take(3);
-            //TakeLast toma los ultimos
-            //TakeWhile, recibe una condición y toma los elementos q cumplan, da los elementos hasta encontrar uno q no cumple
+        //TakeLast toma los ultimos
+        //TakeWhile, recibe una condición y toma los elementos q cumplan, da los elementos hasta encontrar uno q no cumple
 
-            //otra forma:
-            //.OrderBy(p => p.PublishedDate)
-            //.TakeLat(3);
+        //otra forma:
+        //.OrderBy(p => p.PublishedDate)
+        //.TakeLat(3);
     }
     public IEnumerable<Book> TercerYCuartoLibroMas400Pags()
     {
         return librosCollection
-            .Where(p => p.PageCount>400)
+            .Where(p => p.PageCount > 400)
             .Take(4)
             .Skip(2);
-            //SkipLast
-            //SkipWhile
+        //SkipLast
+        //SkipWhile
     }
+
+    public IEnumerable<Item> TresPrimerosLibrosSelect()
+    {
+        return librosCollection.Take(3)
+            .Select(p => new Item()
+            {
+                Title = p.Title,
+                PageCount = p.PageCount
+            });
+    }
+
+    
 
 
 
