@@ -171,5 +171,18 @@ public class LinqQueries
     { // Diccionario tipo ILookup, devuelve char, Book
         return librosCollection.ToLookup(p => p.Title[0], p => p); // (obtenga la primera letra , agrupa libro como tal sin filtro)
     }
+    public IEnumerable<Book> LibrosDespuesdel2005conmasde500Pags()
+    {
+        var LibrosDespuesdel2005 = librosCollection.Where(p => p.PublishedDate.Year > 2005);
+        
+        var LibrosConMasde500Pags = librosCollection.Where(p => p.PageCount > 500);
+
+        // estamos comparando por titulos
+        // e1: elementos de coleccion1 = LibrosDespuesdel2005
+        // e2: elementos de coleccion2 = LibrosConMasde500Pags
+        // retorna e1, es indiferente aca puede ser e1 o e2 porq son los q coindicen y son exactamente iguales
+        return LibrosDespuesdel2005.Join(LibrosConMasde500Pags, e1 => e1.Title, e2=> e2.Title, (e1, e2) => e1); 
+
+    }
 
 }

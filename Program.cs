@@ -72,9 +72,16 @@
 
 //*Con Lookup, retorna un diccionario de libors aprugados por primera
 //*letra del titulo
-var diccionarioLookup = queries.DiccionarioDeLibrosPorLetra();
-ImprimirDiccionario(diccionarioLookup, 'P');
+//var diccionarioLookup = queries.DiccionarioDeLibrosPorLetra();
+//ImprimirDiccionario(diccionarioLookup, 'P');
 
+
+//*Obtén una colección que tenga todos los libros con más de 500 
+//*páginas y otra que contenga los libros publicados después 
+//*del 2005 utilizando la cláusula Join retorna a los libros 
+//*que estén en ambas colecciones
+// libros filtrados con la clausula Join
+ImprimirValores(queries.LibrosDespuesdel2005conmasde500Pags());
 
 
 
