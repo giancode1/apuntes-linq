@@ -39,10 +39,27 @@
 //Console.WriteLine("Cantidad de libros que tienen entre 200 y 500 pags: " + queries.CantidadLibrosEntre200a500Pags());
 
 //*Con Min, retorna la menor fecha de publicación de la lista de libros
-Console.WriteLine("Menor fecha de publicación: " + queries.FechaPublicacionMenor());
+//Console.WriteLine("Menor fecha de publicación: " + queries.FechaPublicacionMenor());
 
 //*Con Max, retorna la cantidad de pags de libro con mayor num de pags en la coleccion
-Console.WriteLine("Max cantidad de páginas: " + queries.MaxCantidadPagsEnColeccion());
+//Console.WriteLine("Max cantidad de páginas: " + queries.MaxCantidadPagsEnColeccion());
+
+//*Retornar el libro que tenga la menor cantidad de pags diferente de 0
+// var libroMenorPags = queries.LibroConMenorPags();
+// Console.WriteLine($"{libroMenorPags.Title} - {libroMenorPags.PageCount}");
+
+//*Retornar libro con fecha de publicacion mas reciente
+// var libroMasReciente = queries.LibroMasReciente();
+// Console.WriteLine($"{libroMasReciente.Title} - {libroMasReciente.PublishedDate.ToShortDateString()}");
+
+//*Retorna la suma de la cantidad de pags, de todos los libros que
+//*tengan entre 0 a 500
+Console.WriteLine("Suma total de pags: "+queries.SumaDeTodasLasPagsLibrosEntre0y500());
+
+//*Con Aggregate, retorna el titulo de los libros que tienen
+//*fecha de publicacion posterior a 2015
+Console.WriteLine(queries.TitulosLibrosDespues2015Concatenados());
+
 
 
 void ImprimirValores(IEnumerable<Book> listaLibros)

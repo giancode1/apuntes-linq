@@ -94,7 +94,7 @@ public class LinqQueries
 
     public long CantidadLibrosEntre200a500Pags()
     {
-        return librosCollection.LongCount(p => p.PageCount >=200 && p.PageCount<=500);
+        return librosCollection.LongCount(p => p.PageCount >= 200 && p.PageCount <= 500);
         //return librosCollection.Where(p => p.PageCount >=200 && p.PageCount<=500).LongCount(); // sirve pero no es buena practica, ya que la condicion puede ir en el LongCount y asi ahorrar ese where
         // return librosCollection.Count(p => p.PageCount >=200 && p.PageCount<=500);  //cambia el int a long
     }
@@ -108,7 +108,34 @@ public class LinqQueries
     {
         return librosCollection.Max(p => p.PageCount);
     }
+    public Book LibroConMenorPags() //devolvemos todo el objeto, el libro como tal
+    {
+        return librosCollection.Where(p => p.PageCount > 0).MinBy(p => p.PageCount);
+    }
 
+    public Book LibroMasReciente() //devolvemos todo el objeto, el libro como tal
+    {
+        return librosCollection.MaxBy(p => p.PublishedDate);
+    }
 
+    public int SumaDeTodasLasPagsLibrosEntre0y500()
+    {
+        return librosCollection.Where(p => p.PageCount >= 0 && p.PageCount <= 500)
+        .Sum(p => p.PageCount);
+    }
+
+    public string TitulosLibrosDespues2015Concatenados()
+    {
+        return librosCollection.Where(p => p.PublishedDate.Year > 2015)
+        .Aggregate("", (TitulosLibros, next) => 
+        {
+            if(TitulosLibros != string.Empty)
+                TitulosLibros += " - " + next.Title;
+            else
+                TitulosLibros += next.Title;
+            
+            return TitulosLibros;
+        });
+    }
 
 }
