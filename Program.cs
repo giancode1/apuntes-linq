@@ -54,28 +54,52 @@
 
 //*Retorna la suma de la cantidad de pags, de todos los libros que
 //*tengan entre 0 a 500
-Console.WriteLine("Suma total de pags: "+queries.SumaDeTodasLasPagsLibrosEntre0y500());
+//Console.WriteLine("Suma total de pags: "+queries.SumaDeTodasLasPagsLibrosEntre0y500());
 
 //*Con Aggregate, retorna el titulo de los libros que tienen
 //*fecha de publicacion posterior a 2015
-Console.WriteLine(queries.TitulosLibrosDespues2015Concatenados());
+//Console.WriteLine(queries.TitulosLibrosDespues2015Concatenados());
 
+//*Con Average retorna el promedio de caracteres que tienen los titulos de la coleccion
+//Console.WriteLine($"Promedio de caracteres de los titulos de los libros: " + queries.PromedioCaracteresTitulosLibros());
+
+//*Promedio Numero de paginas
+//Console.WriteLine($"Promedio numero de paginas: " + queries.PromedioNumeroPagsLibros());
+
+// ? OPERADORES DE AGRUPAMIENTO
+//*Libros publicados a partir del 2000, agrupados por año
+ImprimirGrupo(queries.LibrosDespuesDel2000AgrupadosPorAnio());
 
 
 void ImprimirValores(IEnumerable<Book> listaLibros)
 {
     Console.WriteLine("{0, -60} {1, 15} {2, 15}\n", "Titulo", "N. Páginas", "Fecha Publicación");
-    foreach(var item in listaLibros)
+    foreach (var item in listaLibros)
     {
         Console.WriteLine("{0, -60} {1, 15} {2, 15}", item.Title, item.PageCount, item.PublishedDate.ToShortDateString());
-    }   
+    }
 }
 
 void ImprimirValoresItem(IEnumerable<Item> listaLibros)
 {
     Console.WriteLine("{0, -60} {1, 15}\n", "Titulo", "N. Páginas");
-    foreach(var item in listaLibros)
+    foreach (var item in listaLibros)
     {
         Console.WriteLine("{0, -60} {1, 15}", item.Title, item.PageCount);
-    }   
+    }
 }
+
+void ImprimirGrupo(IEnumerable<IGrouping<int, Book>> ListadeLibros)
+{
+    foreach (var grupo in ListadeLibros)
+    {
+        Console.WriteLine("");
+        Console.WriteLine($"Grupo: {grupo.Key}"); // cada grupo tiene un key, esa key es el anio
+        Console.WriteLine("{0,-60} {1, 15} {2, 15}\n", "Titulo", "N. Paginas", "Fecha publicacion");
+        foreach (var item in grupo)
+        {
+            Console.WriteLine("{0,-60} {1, 15} {2, 15}", item.Title, item.PageCount, item.PublishedDate.Date.ToShortDateString());
+        }
+    }
+}
+

@@ -138,4 +138,21 @@ public class LinqQueries
         });
     }
 
+    public double PromedioCaracteresTitulosLibros()
+    {
+        return librosCollection.Average(p => p.Title.Length);
+    }
+
+    public double PromedioNumeroPagsLibros()
+    {
+        return librosCollection.Where(p => p.PageCount>0).Average(p => p.PageCount);
+        // hay libros cuyo PageCount = 0, no significa que sean 0 sino que no se sabe cuantas paginas tiene
+    }
+
+    public IEnumerable<IGrouping<int, Book>> LibrosDespuesDel2000AgrupadosPorAnio()
+    {
+        return librosCollection.Where(p=>p.PublishedDate.Year >= 200).GroupBy(p => p.PublishedDate.Year);
+        // agrupa por anio
+    }
+
 }
